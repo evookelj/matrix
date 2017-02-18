@@ -68,7 +68,7 @@ impl Matrix {
 		let mut ret = Matrix::new(self.rlen());
 		for r in 0..self.rlen() {
 			for c in 0..self.clen() {
-				ret.add_val(r,c,self.get_val(r,c)*s);
+				ret.add_val(r,self.get_val(r,c)*s);
 			}
 		}
 		return ret;
@@ -104,8 +104,8 @@ fn main() {
 	}
 
 	b.print();
-	b.s_mult(.5);
-	b.print();
+	let x = b.s_mult(0.5);
+	x.print();
 
 	let r = a.m_mult(&b);
 	//r.print();
