@@ -9,6 +9,20 @@ impl Matrix {
 		Matrix { data: ret }
 	}
 
+	fn identity(&self) -> Matrix {
+		let mut ret = Matrix::new(self.rlen());
+		for i in 0..self.rlen() {
+			for j in 0..self.rlen() {
+				if j==i {
+					ret.add_val(i,1.0);
+				} else {
+					ret.add_val(i,0.0);
+				}
+			}
+		}
+		return ret;
+	}
+
 	fn get_val(&self, r: usize, c: usize) -> f32 {
 		return self.data[r as usize][c as usize];
 	}
@@ -94,7 +108,8 @@ fn main() {
 			a.add_val(i,(i+j) as f32);
 		}
 	}
-	//a.print();
+	println!("MATRIX A:");
+	a.print();
 
 	let mut b = Matrix::new(3);
 	for i in 0..b.rlen() {
@@ -102,11 +117,18 @@ fn main() {
 			b.add_val(i,(j as isize-i as isize) as f32);
 		}
 	}
-
+	println!("MATRIX B:");
 	b.print();
-	let x = b.s_mult(0.5);
-	x.print();
 
 	let r = a.m_mult(&b);
-	//r.print();
+	println!("MATRIX R: result of AxB:");
+	r.print();
+
+	let s = r.s_mult(0.5);
+	println!("MATRIX S: result of Matrix R multiplied by .5:");
+	s.print();
+
+	let i = s.identity();
+	println!("MATRIX I: identity matrix of S");
+	i.print();
 }
