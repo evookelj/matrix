@@ -41,7 +41,7 @@ impl Matrix {
 		}
 	}
 
-	fn mult(&self, o: &Matrix) -> Matrix {
+	fn m_mult(&self, o: &Matrix) -> Matrix {
 		let mut ret = Matrix::new(self.rlen());
 
 		if self.clen()!=o.rlen() { 
@@ -59,6 +59,16 @@ impl Matrix {
 					val += self.get_val(r,k)*o.get_val(k,c);
 				}
 				ret.add_val(r,val);
+			}
+		}
+		return ret;
+	}
+
+	fn s_mult(&self, s: f32) -> Matrix {
+		let mut ret = Matrix::new(self.rlen());
+		for r in 0..self.rlen() {
+			for c in 0..self.clen() {
+				ret.add_val(r,c,self.get_val(r,c)*s);
 			}
 		}
 		return ret;
@@ -84,7 +94,7 @@ fn main() {
 			a.add_val(i,(i+j) as f32);
 		}
 	}
-	a.print();
+	//a.print();
 
 	let mut b = Matrix::new(3);
 	for i in 0..b.rlen() {
@@ -94,8 +104,9 @@ fn main() {
 	}
 
 	b.print();
+	b.s_mult(.5);
+	b.print();
 
-	//let mut b = Matrix::new(3);
-	let r = a.mult(&b);
-	r.print();
+	let r = a.m_mult(&b);
+	//r.print();
 }
