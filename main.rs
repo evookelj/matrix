@@ -104,11 +104,17 @@ fn draw_line(x0: i32, y0: i32, x1: i32, y1: i32, screen: &mut [[[u32; 3]; 500]; 
 fn img(gm: &mut Gmatrix) {
 	let mut i:i32 = -250;
 	let mut j:i32 = -250;
+	let mut ctr = 0;
 	while i<251 {
 		while j<251 {
+			if ctr==6 {
+				println!("The graphics matrix after {} lines are drawn: ",ctr);
+				gm.print();
+			}
 			gm.add_edge(i, (i-j)%250, j, (j-i)%250);
 			gm.add_edge((i-j)%250,i*-1,(j-i)%250,j*-1);
 			j += 50;
+			ctr += 2;
 		}
 		i += 50;
 		j=-250;
