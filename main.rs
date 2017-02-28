@@ -5,6 +5,7 @@ use std::path::Path;
 mod matrix;
 use matrix::reg_test;
 use matrix::Gmatrix;
+use matrix::Matrix;
 
 fn plot(x: i32, y: i32, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3]) {
 	let y2 = (250+y) as usize;
@@ -160,6 +161,8 @@ fn main() {
 	let mut screen: [[[u32; 3]; 500]; 500] = [[[0; 3]; 500]; 500];
 	let mut gm = Gmatrix::new();
 	img(&mut gm);
+	let mut m = Gmatrix::new();
+	//m = gm.s_mult(0.5);
 	draw(gm, &mut screen);
 
 	for i in 0..500 {

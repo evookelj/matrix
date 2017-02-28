@@ -132,7 +132,11 @@ impl Gmatrix {
 
 	pub fn clen(&self) -> usize { return self.data.clen(); }
 
-	pub fn s_mult(&self, s: f32) -> Matrix { return self.data.s_mult(s); }
+	pub fn s_mult(&self, s: f32) -> Gmatrix {
+		let mut r = Gmatrix::new();
+		r.data = self.data.s_mult(s);
+		return r;
+	}
 
 	pub fn m_mult(&self, o: Gmatrix) -> Matrix { return self.data.m_mult(&o.data); }
 
